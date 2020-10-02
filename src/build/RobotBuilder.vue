@@ -1,7 +1,12 @@
 <template>
-  <div>
+  <div class="container">
+    <button @click="addToCart()" class="add-to-cart">Add to Cart</button>
     <div class="top-row">
       <div class="top part">
+        <div class="robot-name">
+          {{selectedRobot.head.title}}
+          <span v-if="selectedRobot.head.onSale" class="sale">Sale!</span>
+        </div>
         <img :src="selectedRobot.head.src" title="head" />
         <button @click="selectPreviousHead" class="prev-selector">&#9668;</button>
         <button @click="selectNextHead" class="next-selector">&#9658;</button>
@@ -31,6 +36,23 @@
         <button @click="selectNextBase" class="next-selector">&#9658;</button>
       </div>
     </div>
+    <div>
+      <h1>Cart</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Robot</th>
+            <th class="cost">Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(robot, index) in cart" :key="index">
+            <td>{{robot.name}}</td>
+            <td class="cost">{{robot.cost}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -55,6 +77,7 @@ export default {
       selectedRightArmIndex: 0,
       selectedTorsoIndex: 0,
       selectedBaseIndex: 0,
+      cart: [],
     };
   },
   computed: {
@@ -66,7 +89,7 @@ export default {
         torso: this.availableParts.torsos[this.selectedTorsoIndex],
         base: this.availableParts.bases[this.selectedBaseIndex],
       }
-    }
+    },
   },
   methods: {
     selectNextHead() {
@@ -119,6 +142,10 @@ export default {
         this.selectedBaseIndex,
         availableParts.bases.length);
     },
+    addToCart() {
+      const cost = Object.values(this.selectedRobot).reduce((sum, part) => sum + part.cost, 0);
+      this.cart = [...this.cart, { name: this.selectedRobot.head.title, cost }];
+    }
   },
 };
 </script>
@@ -212,5 +239,32 @@ export default {
 }
 .right .next-selector {
   right: -3px;
+}
+.robot-name {
+  position: absolute;
+  top: -25px;
+  width: 100%;
+  text-align: center;
+}
+.sale {
+  color: red;
+}
+.container {
+  position: relative;
+}
+.add-to-cart {
+  position: absolute;
+  right: 30px;
+  width: 220px;
+  padding: 3px;
+  font-size: 16px;
+}
+th, td {
+  text-align: left;
+  padding: 5px;
+  padding-right: 20px;
+}
+.cost {
+  text-align: right;
 }
 </style>
