@@ -69,15 +69,6 @@ export default {
           : "3px solid #aaa",
       };
     },
-    selectedRobot() {
-      return {
-        head: {},
-        leftArm: {},
-        rightArm: {},
-        torso: {},
-        base: {},
-      };
-    },
   },
   methods: {
     addToCart() {
