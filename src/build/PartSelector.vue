@@ -35,6 +35,12 @@ export default {
           },
       }
   },
+  created() {
+      this.emitSelectedPart();
+  },
+  updated () {
+      this.emitSelectedPart();
+  },
   computed: {
     selectedPart() {
       return this.parts[this.selectedPartIndex];
@@ -46,14 +52,18 @@ export default {
         this.selectedPartIndex,
         this.parts.length,
       );
+    //   this.$emit('partSelected', this.selectedPart);
     },
     selectPreviousPart() {
       this.selectedPartIndex = getPreviousValidIndex(
         this.selectedPartIndex,
         this.parts.length,
       );
+    //   this.$emit('partSelected', this.selectedPart);
     },
-
+    emitSelectedPart() {
+        this.$emit('partSelected', this.selectedPart);
+    }
   },
 };
 
