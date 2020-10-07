@@ -16,7 +16,7 @@ export default new Router({
         name: 'Build',
         component: RobotBuilder
     }, {
-        path: '/parts',
+        path: '/parts/:partType/:id',
         name: 'Parts',
         component: PartInfo
     }]
