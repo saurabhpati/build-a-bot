@@ -12,12 +12,24 @@ import parts from "../data/parts";
 
 export default {
   name: "PartInfo",
+  props: {
+    partType: { type: String },
+    id: {
+      type: Number,
+      validator: function (value) {
+        return Number.isInteger(Number(value));
+      },
+    },
+  },
   computed: {
     part() {
-      const { partType, id } = this.$route.params;
-
-      return parts[partType].find(part => part.id === +id);
+      const { partType, id } = this;
+      console.log({
+        partType,
+        id,
+      });
+      return parts[partType].find((part) => part.id === +id);
     },
-  }
+  },
 };
 </script>
