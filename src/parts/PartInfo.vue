@@ -24,10 +24,6 @@ export default {
   computed: {
     part() {
       const { partType, id } = this;
-      console.log({
-        partType,
-        id,
-      });
       return parts[partType].find((part) => part.id === +id);
     },
   },
