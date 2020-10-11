@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="content">
     <div class="preview">
       <CollapsibleSection>
         <div class="preview-content">
@@ -219,7 +219,7 @@ export default {
 .sale {
   color: red;
 }
-.container {
+.content {
   position: relative;
 }
 .add-to-cart {
