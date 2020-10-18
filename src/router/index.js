@@ -57,6 +57,11 @@ export default new Router({
         path: '/parts/:partType/:id',
         name: 'Parts',
         component: PartInfo,
-        props: true
+        props: true,
+        beforeEnter: function(to, from, next) {
+            const id = to.params.id
+            const isValid = Number.isInteger(Number(id));
+            next(isValid);
+        }
     }]
 });

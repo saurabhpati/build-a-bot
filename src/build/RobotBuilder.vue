@@ -82,6 +82,14 @@ import CollapsibleSection from "../shared/CollapsibleSection.vue";
 
 export default {
   name: "RobotBuilder",
+  beforeRouteLeave(to, from, next) {
+    if (this.cart.length) {
+      next(true);
+    } else {
+      const response = confirm("Are you sure you want to leave without adding robot to cart?");
+      return next(response);
+    }
+  },
   data() {
     return {
       availableParts,
